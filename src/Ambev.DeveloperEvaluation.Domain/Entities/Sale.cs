@@ -1,56 +1,113 @@
-
 using Ambev.DeveloperEvaluation.Domain.Common;
+using Ambev.DeveloperEvaluation.Domain.Enums;
+using Ambev.DeveloperEvaluation.Domain.Validation;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
 /// <summary>
-/// Represents a sales transaction containing customer, branch, item list and total.
+/// Represents a sale in the system with all its details and business rules.
+/// This entity follows domain-driven design principles and includes business rules validation.
 /// </summary>
 public class Sale : BaseEntity
 {
     /// <summary>
-    /// Unique number to identify the sale.
+    /// Gets the sale number.
+    /// Must be unique and follow the business format.
     /// </summary>
     public string SaleNumber { get; set; } = string.Empty;
 
     /// <summary>
-    /// Date when the sale was made.
+    /// Gets the date when the sale was made.
     /// </summary>
     public DateTime Date { get; set; }
 
     /// <summary>
-    /// Foreign key to the customer.
+    /// Gets the customer information.
     /// </summary>
-    public int CustomerId { get; set; }
+    public string Customer { get; set; } = string.Empty;
 
     /// <summary>
-    /// Denormalized name of the customer.
-    /// </summary>
-    public string CustomerName { get; set; } = default!;
-
-
-    /// <summary>
-    /// Foreign key to the branch where the sale occurred.
-    /// </summary>
-    public int BranchId { get; set; }
-
-    /// <summary>
-    /// Denormalized name of the branch.
-    /// </summary>
-    public string BranchName { get; set; } = default!;
-
-    /// <summary>
-    /// Indicates whether the sale was cancelled.
-    /// </summary>
-    public bool IsCancelled { get; set; }
-
-    /// <summary>
-    /// Total amount of the sale.
+    /// Gets the total sale amount.
     /// </summary>
     public decimal TotalAmount { get; set; }
 
     /// <summary>
-    /// List of items in this sale.
+    /// Gets the branch where the sale was made.
+    /// </summary>
+    public string Branch { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets the list of items in the sale.
     /// </summary>
     public List<SaleItem> Items { get; set; } = new();
+
+    /// <summary>
+    /// Gets whether the sale is cancelled.
+    /// </summary>
+    public bool IsCancelled { get; set; }
+
+    /// <summary>
+    /// Gets the date and time when the sale was created.
+    /// </summary>
+    public DateTime CreatedAt { get; set; }
+
+    /// <summary>
+    /// Gets the date and time of the last update to the sale's information.
+    /// </summary>
+    public DateTime? UpdatedAt { get; set; }
+
+    /// <summary>
+    /// Initializes a new instance of the Sale class.
+    /// </summary>
+    public Sale()
+    {
+        CreatedAt = DateTime.UtcNow;
+        Date = DateTime.UtcNow;
+    }
+
+
+    /// <summary>
+    /// Cancels the sale.
+    /// Changes the sale's status to cancelled.
+    /// </summary>
+    public void Cancel()
+    {
+        IsCancelled = true;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Calculates the total amount of the sale including discounts.
+    /// </summary>
+    public void CalculateTotalAmount()
+    {
+        TotalAmount = Items.Sum(item => item.TotalAmount);
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Applies discounts based on quantity rules.
+    /// </summary>
+    public void ApplyDiscounts()
+    {
+        foreach (var item in Items)
+        {
+            if (item.Quantity >= 10 && item.Quantity <= 20)
+            {
+                item.Discount = 0.20m; // 20% discount
+            }
+            else if (item.Quantity >= 4)
+            {
+                item.Discount = 0.10m; // 10% discount
+            }
+            else
+            {
+                item.Discount = 0m; // No discount
+            }
+
+            item.CalculateTotalAmount();
+        }
+
+        CalculateTotalAmount();
+    }
 }

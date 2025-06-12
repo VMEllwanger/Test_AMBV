@@ -16,7 +16,7 @@ public class SaleItemConfiguration : IEntityTypeConfiguration<SaleItem>
         builder.Property(i => i.Quantity).IsRequired();
         builder.Property(i => i.UnitPrice).HasPrecision(18, 2);
         builder.Property(i => i.Discount).HasPrecision(18, 2);
-        builder.Property(i => i.Total).HasPrecision(18, 2);
+        builder.Property(i => i.TotalAmount).HasPrecision(18, 2);
         builder.Property(i => i.IsCancelled).IsRequired();
 
     }

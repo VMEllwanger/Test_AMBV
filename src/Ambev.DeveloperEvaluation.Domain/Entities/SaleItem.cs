@@ -1,47 +1,72 @@
-
 using Ambev.DeveloperEvaluation.Domain.Common;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
 /// <summary>
-/// Represents a product sold in a sale transaction.
+/// Represents an item in a sale with its details and calculations.
+/// This entity follows domain-driven design principles and includes business rules validation.
 /// </summary>
 public class SaleItem : BaseEntity
 {
     /// <summary>
-    /// Foreign key to the parent sale.
+    /// Gets the product identifier.
     /// </summary>
-    public Guid SaleId { get; set; }
+    public string ProductId { get; set; } = string.Empty;
 
     /// <summary>
-    /// Product Name.
+    /// Gets the product name.
     /// </summary>
-    public string ProductName { get; set; } = default!;
+    public string ProductName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Quantity of the product.
+    /// Gets the quantity of the product.
     /// </summary>
     public int Quantity { get; set; }
 
     /// <summary>
-    /// Price per unit.
+    /// Gets the unit price of the product.
     /// </summary>
     public decimal UnitPrice { get; set; }
 
     /// <summary>
-    /// Discount applied to the item.
+    /// Gets the discount percentage applied to this item.
     /// </summary>
     public decimal Discount { get; set; }
 
     /// <summary>
-    /// Total amount for this item (after discount).
+    /// Gets the total amount for this item (including discount).
     /// </summary>
-    public decimal Total { get; set; }
+    public decimal TotalAmount { get; set; }
 
     /// <summary>
-    /// ItemSaleCancelled flag.
+    /// Gets the foreign key to the sale.
+    /// </summary>
+    public Guid SaleId { get; set; }
+
+    /// <summary>
+    /// Gets the navigation property to the sale.
+    /// </summary>
+    public Sale Sale { get; set; } = null!;
+
+    /// <summary>
+    /// Gets whether the item is cancelled.
     /// </summary>
     public bool IsCancelled { get; set; }
 
-    public Sale Sale { get; set; } = default!;
+    /// <summary>
+    /// Initializes a new instance of the SaleItem class.
+    /// </summary>
+    public SaleItem()
+    {
+    }
+
+    /// <summary>
+    /// Calculates the total amount for this item including discount.
+    /// </summary>
+    public void CalculateTotalAmount()
+    {
+        var subtotal = Quantity * UnitPrice;
+        var discountAmount = subtotal * Discount;
+        TotalAmount = subtotal - discountAmount;
+    }
 }

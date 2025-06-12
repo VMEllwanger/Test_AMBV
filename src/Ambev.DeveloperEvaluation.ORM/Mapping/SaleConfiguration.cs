@@ -15,11 +15,8 @@ public class SaleConfiguration : IEntityTypeConfiguration<Sale>
         builder.Property(s => s.SaleNumber).IsRequired().HasMaxLength(50);
         builder.Property(s => s.Date).IsRequired();
 
-        builder.Property(s => s.CustomerId).IsRequired();
-        builder.Property(s => s.CustomerName).IsRequired().HasMaxLength(100);
-
-        builder.Property(s => s.BranchId).IsRequired();
-        builder.Property(s => s.BranchName).IsRequired().HasMaxLength(100);
+        builder.Property(s => s.Customer).IsRequired().HasMaxLength(100);
+        builder.Property(s => s.Branch).IsRequired().HasMaxLength(100);
 
         builder.Property(s => s.TotalAmount).HasPrecision(18, 2);
         builder.Property(s => s.IsCancelled).IsRequired();
