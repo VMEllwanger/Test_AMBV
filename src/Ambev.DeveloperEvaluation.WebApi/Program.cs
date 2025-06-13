@@ -82,7 +82,8 @@ public class Program
             Console.WriteLine("Aplicação construída...");
 
             app.UseMiddleware<ValidationExceptionMiddleware>();
-            Console.WriteLine("Middleware de validação configurado...");
+            app.UseMiddleware<RequestLoggingMiddleware>();
+            Console.WriteLine("Middlewares configurados...");
 
             if (app.Environment.IsDevelopment())
             {

@@ -14,6 +14,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales;
 
@@ -27,16 +28,19 @@ public class SaleController : ControllerBase
 {
   private readonly IMediator _mediator;
   private readonly IMapper _mapper;
+  private readonly ILogger<SaleController> _logger;
 
   /// <summary>
   /// Initializes a new instance of SaleController
   /// </summary>
   /// <param name="mediator">The mediator instance</param>
-  /// <param name="mapper">The AutoMapper instance</param> 
-  public SaleController(IMediator mediator, IMapper mapper)
+  /// <param name="mapper">The AutoMapper instance</param>
+  /// <param name="logger">The logger instance</param> 
+  public SaleController(IMediator mediator, IMapper mapper, ILogger<SaleController> logger)
   {
     _mediator = mediator;
     _mapper = mapper;
+    _logger = logger;
   }
 
   /// <summary>
@@ -48,16 +52,21 @@ public class SaleController : ControllerBase
   [HttpPost]
   public async Task<ActionResult<CreateSaleResponse>> Create([FromBody] CreateSaleRequest request, CancellationToken cancellationToken)
   {
+    _logger.LogInformation("Creating new sale for customer: {Customer}", request.Customer);
+
     var validator = new CreateSaleRequestValidator();
     var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
     if (!validationResult.IsValid)
+    {
+      _logger.LogWarning("Invalid sale creation request: {Errors}", validationResult.Errors);
       return BadRequest(validationResult.Errors);
+    }
 
     var command = _mapper.Map<CreateSaleCommand>(request);
-
     var response = await _mediator.Send(command);
 
+    _logger.LogInformation("Sale created successfully with ID: {SaleId}", response.Id);
 
     return Created(string.Empty, new ApiResponseWithData<CreateSaleResponse>
     {
@@ -76,16 +85,22 @@ public class SaleController : ControllerBase
   [HttpGet("{id}")]
   public async Task<ActionResult<GetSaleResponse>> Get(Guid id, CancellationToken cancellationToken)
   {
-    var request = new GetSaleRequest { Id = id };
+    _logger.LogInformation("Retrieving sale with ID: {SaleId}", id);
 
+    var request = new GetSaleRequest { Id = id };
     var validator = new GetSaleRequestValidator();
     var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
     if (!validationResult.IsValid)
+    {
+      _logger.LogWarning("Invalid sale retrieval request: {Errors}", validationResult.Errors);
       return BadRequest(validationResult.Errors);
+    }
 
     var command = _mapper.Map<GetSaleCommand>(request.Id);
     var response = await _mediator.Send(command);
+
+    _logger.LogInformation("Sale retrieved successfully: {SaleId}", id);
 
     return Ok(new ApiResponseWithData<GetSaleResponse>
     {
@@ -104,16 +119,22 @@ public class SaleController : ControllerBase
   [HttpGet]
   public async Task<ActionResult<GetAllSaleResponse>> GetAll([FromQuery] GetAllSaleRequest request, CancellationToken cancellationToken)
   {
+    _logger.LogInformation("Retrieving sales list with filters: {@Filters}", new { request.Page, request.PageSize, request.SearchTerm, request.IsCancelled });
+
     var validator = new GetAllSaleRequestValidator();
     var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
     if (!validationResult.IsValid)
+    {
+      _logger.LogWarning("Invalid sales list request: {Errors}", validationResult.Errors);
       return BadRequest(validationResult.Errors);
-
+    }
 
     var command = _mapper.Map<GetAllSaleCommand>(request);
-
     var response = await _mediator.Send(command);
+
+    _logger.LogInformation("Sales list retrieved successfully. Total items: {TotalCount}", response.TotalItems);
+
     return Ok(new ApiResponseWithData<GetAllSaleResponse>
     {
       Success = true,
@@ -166,15 +187,22 @@ public class SaleController : ControllerBase
   [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
   public async Task<ActionResult<DeleteSaleResponse>> Delete(Guid id, CancellationToken cancellationToken)
   {
+    _logger.LogInformation("Deleting sale with ID: {SaleId}", id);
+
     var request = new DeleteSaleRequest { Id = id };
     var validator = new DeleteSaleRequestValidator();
     var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
     if (!validationResult.IsValid)
+    {
+      _logger.LogWarning("Invalid sale deletion request: {Errors}", validationResult.Errors);
       return BadRequest(validationResult.Errors);
+    }
 
-    var command = _mapper.Map<DeleteSaleCommand>(request.Id);
+    var command = _mapper.Map<DeleteSaleCommand>(request);
     await _mediator.Send(command, cancellationToken);
+
+    _logger.LogInformation("Sale deleted successfully: {SaleId}", id);
 
     return Ok(new ApiResponse
     {
