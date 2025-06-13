@@ -1,4 +1,6 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Events;
+using Ambev.DeveloperEvaluation.Domain.Interfaces;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using FluentValidation;
@@ -13,17 +15,20 @@ public class UpdateSaleHandler : IRequestHandler<UpdateSaleCommand, UpdateSaleRe
   private readonly IMapper _mapper;
   private readonly IValidator<UpdateSaleCommand> _validator;
   private readonly ILogger<UpdateSaleHandler> _logger;
+  private readonly ISaleEventPublisher _eventPublisher;
 
   public UpdateSaleHandler(
       ISaleRepository saleRepository,
       IMapper mapper,
       IValidator<UpdateSaleCommand> validator,
-      ILogger<UpdateSaleHandler> logger)
+      ILogger<UpdateSaleHandler> logger,
+      ISaleEventPublisher eventPublisher)
   {
     _saleRepository = saleRepository;
     _mapper = mapper;
     _validator = validator;
     _logger = logger;
+    _eventPublisher = eventPublisher;
   }
 
   public async Task<UpdateSaleResult> Handle(UpdateSaleCommand request, CancellationToken cancellationToken)
@@ -42,13 +47,13 @@ public class UpdateSaleHandler : IRequestHandler<UpdateSaleCommand, UpdateSaleRe
     if (sale == null)
     {
       _logger.LogWarning("Sale not found with ID: {SaleId}", request.Id);
-      throw new KeyNotFoundException($"Venda com ID {request.Id} não encontrada.");
+      throw new KeyNotFoundException($"Sale with ID {request.Id} not found.");
     }
 
     if (sale.IsCancelled)
     {
       _logger.LogWarning("Attempted to update cancelled sale with ID: {SaleId}", request.Id);
-      throw new InvalidOperationException("Não é possível atualizar uma venda cancelada.");
+      throw new InvalidOperationException("Cannot update a cancelled sale.");
     }
 
     _logger.LogDebug("Updating sale properties");
@@ -58,6 +63,15 @@ public class UpdateSaleHandler : IRequestHandler<UpdateSaleCommand, UpdateSaleRe
 
     _logger.LogInformation("Saving updated sale to repository");
     await _saleRepository.UpdateAsync(sale, cancellationToken);
+
+    _logger.LogInformation("Publishing SaleModified event");
+    await _eventPublisher.PublishSaleModifiedAsync(new SaleModifiedEvent(
+        sale.Id,
+        sale.SaleNumber,
+        sale.Customer,
+        sale.Branch,
+        sale.TotalAmount,
+        DateTime.UtcNow));
 
     _logger.LogInformation("Sale updated successfully with ID: {SaleId}", sale.Id);
     return _mapper.Map<UpdateSaleResult>(sale);

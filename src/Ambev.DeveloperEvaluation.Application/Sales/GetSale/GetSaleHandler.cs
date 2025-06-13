@@ -41,7 +41,7 @@ public class GetSaleHandler : IRequestHandler<GetSaleCommand, GetSaleResult>
     if (sale == null)
     {
       _logger.LogWarning("Sale not found with ID: {SaleId}", request.Id);
-      throw new KeyNotFoundException($"Venda com ID {request.Id} não encontrada.");
+      throw new KeyNotFoundException($"Sale with ID {request.Id} not found.");
     }
 
     _logger.LogInformation("Sale retrieved successfully for ID: {SaleId}", sale.Id);
