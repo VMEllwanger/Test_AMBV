@@ -1,11 +1,14 @@
-using AutoMapper;
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using AutoMapper;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
 
 /// <summary>
 /// AutoMapper profile for authentication-related mappings
 /// </summary>
+/// 
+[ExcludeFromCodeCoverage]
 public sealed class AuthenticateUserProfile : Profile
 {
     /// <summary>

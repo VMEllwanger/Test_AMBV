@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.DeleteSale;
@@ -8,6 +9,6 @@ public class DeleteSaleRequestValidator : AbstractValidator<DeleteSaleRequest>
   {
     RuleFor(x => x.Id)
         .NotEmpty()
-        .WithMessage("O ID da venda é obrigatório");
+        .WithMessage(ValidationMessages.SaleIdRequired);
   }
 }

@@ -1,8 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 
 /// <summary>
 /// Response model for DeleteUser operation
 /// </summary>
+/// 
+[ExcludeFromCodeCoverage]
 public class DeleteUserResponse
 {
     /// <summary>

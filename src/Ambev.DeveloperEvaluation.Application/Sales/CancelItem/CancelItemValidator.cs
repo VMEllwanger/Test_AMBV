@@ -1,4 +1,5 @@
 using FluentValidation;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CancelItem;
 
@@ -8,11 +9,11 @@ public class CancelItemValidator : AbstractValidator<CancelItemCommand>
   {
     RuleFor(x => x.SaleId)
         .NotEmpty()
-        .WithMessage("O ID da venda é obrigatório");
+        .WithMessage(ValidationMessages.SaleIdRequired);
 
     RuleFor(x => x.ItemId)
         .NotEmpty()
-        .WithMessage("O ID do item é obrigatório");
+        .WithMessage(ValidationMessages.ItemIdRequired);
 
   }
 }

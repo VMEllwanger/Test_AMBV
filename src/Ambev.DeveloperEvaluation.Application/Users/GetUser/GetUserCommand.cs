@@ -1,10 +1,13 @@
 using MediatR;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 
 /// <summary>
 /// Command for retrieving a user by their ID
 /// </summary>
+/// 
+[ExcludeFromCodeCoverage]
 public record GetUserCommand : IRequest<GetUserResult>
 {
     /// <summary>

@@ -5,6 +5,7 @@ using AutoMapper;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CancelSale;
 
@@ -49,7 +50,7 @@ public class CancelSaleHandler : IRequestHandler<CancelSaleCommand, CancelSaleRe
       return new CancelSaleResult
       {
         Success = false,
-        Message = "Sale not found"
+        Message = string.Format(ApiMessages.SaleNotFound, request.Id)
       };
     }
 
@@ -59,7 +60,7 @@ public class CancelSaleHandler : IRequestHandler<CancelSaleCommand, CancelSaleRe
       return new CancelSaleResult
       {
         Success = false,
-        Message = "Sale is already cancelled"
+        Message = ApiMessages.SaleAlreadyCancelled
       };
     }
 
@@ -83,7 +84,7 @@ public class CancelSaleHandler : IRequestHandler<CancelSaleCommand, CancelSaleRe
     return new CancelSaleResult
     {
       Success = true,
-      Message = "Sale cancelled successfully"
+      Message = ApiMessages.SaleCancelled
     };
   }
 }

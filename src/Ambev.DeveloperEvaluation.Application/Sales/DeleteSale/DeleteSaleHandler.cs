@@ -3,6 +3,7 @@ using AutoMapper;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
 
@@ -39,19 +40,17 @@ public class DeleteSaleHandler : IRequestHandler<DeleteSaleCommand, DeleteSaleRe
     _logger.LogDebug("Attempting to delete sale from repository");
     var success = await _saleRepository.DeleteAsync(request.Id, cancellationToken);
 
-    if (success)
-    {
-      _logger.LogInformation("Sale deleted successfully with ID: {SaleId}", request.Id);
-    }
-    else
+    if (!success)
     {
       _logger.LogWarning("Sale not found for deletion with ID: {SaleId}", request.Id);
+      throw new KeyNotFoundException(string.Format(ApiMessages.SaleNotFound, request.Id));
     }
 
+    _logger.LogInformation("Sale deleted successfully with ID: {SaleId}", request.Id);
     return new DeleteSaleResult
     {
-      Success = success,
-      Message = success ? "Venda excluída com sucesso" : "Venda não encontrada"
+      Success = true,
+      Message = ApiMessages.SaleDeleted
     };
   }
 }

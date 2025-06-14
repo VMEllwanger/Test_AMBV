@@ -1,4 +1,5 @@
 using FluentValidation;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
 {
@@ -8,10 +9,13 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
         {
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .EmailAddress();
+                .WithMessage(ValidationMessages.EmailRequired)
+                .EmailAddress()
+                .WithMessage(ValidationMessages.EmailInvalidFormat);
 
             RuleFor(x => x.Password)
                 .NotEmpty()
+                .WithMessage(ValidationMessages.PasswordRequired)
                 .MinimumLength(6);
         }
     }

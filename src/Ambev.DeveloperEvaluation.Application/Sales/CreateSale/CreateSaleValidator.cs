@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
@@ -8,23 +9,23 @@ public class CreateSaleValidator : AbstractValidator<CreateSaleCommand>
     {
         RuleFor(x => x.SaleNumber)
             .NotEmpty()
-            .WithMessage("O número da venda é obrigatório");
+            .WithMessage(ValidationMessages.SaleNumberRequired);
 
         RuleFor(x => x.Date)
             .NotEmpty()
-            .WithMessage("A data da venda é obrigatória");
+            .WithMessage(ValidationMessages.SaleDateRequired);
 
         RuleFor(x => x.Customer)
             .NotEmpty()
-            .WithMessage("O cliente é obrigatório");
+            .WithMessage(ValidationMessages.CustomerRequired);
 
         RuleFor(x => x.Branch)
             .NotEmpty()
-            .WithMessage("A filial é obrigatória");
+            .WithMessage(ValidationMessages.BranchRequired);
 
         RuleFor(x => x.Items)
             .NotEmpty()
-            .WithMessage("A venda deve ter pelo menos um item");
+            .WithMessage(ValidationMessages.SaleItemsRequired);
 
         RuleForEach(x => x.Items)
             .SetValidator(new CreateSaleItemValidator());
@@ -37,20 +38,20 @@ public class CreateSaleItemValidator : AbstractValidator<CreateSaleItemCommand>
     {
         RuleFor(x => x.ProductId)
             .NotEmpty()
-            .WithMessage("O ID do produto é obrigatório");
+            .WithMessage(ValidationMessages.ProductIdRequired);
 
         RuleFor(x => x.ProductName)
             .NotEmpty()
-            .WithMessage("O nome do produto é obrigatório");
+            .WithMessage(ValidationMessages.ProductNameRequired);
 
         RuleFor(x => x.Quantity)
             .GreaterThan(0)
-            .WithMessage("A quantidade deve ser maior que zero")
+            .WithMessage(ValidationMessages.QuantityGreaterThanZero)
             .LessThanOrEqualTo(20)
-            .WithMessage("A quantidade não pode ser maior que 20");
+            .WithMessage(ValidationMessages.QuantityLessThanOrEqualTwenty);
 
         RuleFor(x => x.UnitPrice)
             .GreaterThan(0)
-            .WithMessage("O preço unitário deve ser maior que zero");
+            .WithMessage(ValidationMessages.UnitPriceGreaterThanZero);
     }
 }

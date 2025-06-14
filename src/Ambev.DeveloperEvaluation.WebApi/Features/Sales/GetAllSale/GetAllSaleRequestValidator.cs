@@ -1,18 +1,19 @@
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetAllSale;
 
 public class GetAllSaleRequestValidator : AbstractValidator<GetAllSaleRequest>
 {
-  public GetAllSaleRequestValidator()
-  {
-    RuleFor(x => x.Page)
-        .GreaterThan(0)
-        .WithMessage("A página deve ser maior que zero");
+    public GetAllSaleRequestValidator()
+    {
+        RuleFor(x => x.Page)
+            .GreaterThan(0)
+            .WithMessage(ValidationMessages.PageGreaterThanZero);
 
-    RuleFor(x => x.PageSize)
-        .GreaterThan(0)
-        .LessThanOrEqualTo(100)
-        .WithMessage("O tamanho da página deve estar entre 1 e 100");
-  }
+        RuleFor(x => x.PageSize)
+            .GreaterThan(0)
+            .LessThanOrEqualTo(100)
+            .WithMessage(ValidationMessages.PageSizeBetweenOneAndHundred);
+    }
 }

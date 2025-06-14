@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using Ambev.DeveloperEvaluation.Domain.Validation;
 using Ambev.DeveloperEvaluation.Unit.Domain.Entities.TestData;
 using FluentValidation.TestHelper;
@@ -48,7 +49,7 @@ public class EmailValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(x => x)
-            .WithErrorMessage("The email address cannot be empty.");
+            .WithErrorMessage(ValidationMessages.EmailRequired);
     }
 
     /// <summary>
@@ -67,7 +68,7 @@ public class EmailValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(x => x)
-            .WithErrorMessage("The provided email address is not valid.");
+            .WithErrorMessage(ValidationMessages.EmailInvalidFormat);
     }
 
     /// <summary>
@@ -84,6 +85,6 @@ public class EmailValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(x => x)
-            .WithErrorMessage("The email address cannot be longer than 100 characters.");
+            .WithErrorMessage(ValidationMessages.EmailMaxLength);
     }
 }

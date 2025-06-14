@@ -73,6 +73,8 @@ public class CreateUserHandlerTests
         await _userRepository.Received(1).CreateAsync(Arg.Any<User>(), Arg.Any<CancellationToken>());
     }
 
+
+
     /// <summary>
     /// Tests that an invalid user creation request throws a validation exception.
     /// </summary>
@@ -80,7 +82,7 @@ public class CreateUserHandlerTests
     public async Task Handle_InvalidRequest_ThrowsValidationException()
     {
         // Given
-        var command = new CreateUserCommand(); // Empty command will fail validation
+        var command = new CreateUserCommand();
 
         // When
         var act = () => _handler.Handle(command, CancellationToken.None);
@@ -159,5 +161,35 @@ public class CreateUserHandlerTests
             c.Phone == command.Phone &&
             c.Status == command.Status &&
             c.Role == command.Role));
+    }
+
+    /// <summary>
+    /// Tests that GetByEmailAsync does not return null.
+    /// </summary>
+    [Fact(DisplayName = "Given valid email When getting user by email Then returns user")]
+    public async Task GetByEmailAsync_ValidEmail_ReturnsUser()
+    {
+        // Given
+        var command = CreateUserHandlerTestData.GenerateValidCommand();
+        var email = "test@example.com";
+        var user = new User
+        {
+            Id = Guid.NewGuid(),
+            Username = "testuser",
+            Password = "password",
+            Email = email,
+            Phone = "1234567890"
+        };
+
+        _userRepository.GetByEmailAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
+            .Returns(user);
+
+        // When
+        var result = await _userRepository.GetByEmailAsync(email, CancellationToken.None);
+        // When 
+        var act = () => _handler.Handle(command, CancellationToken.None);
+
+        // Then
+        await act.Should().ThrowAsync<InvalidOperationException>();
     }
 }

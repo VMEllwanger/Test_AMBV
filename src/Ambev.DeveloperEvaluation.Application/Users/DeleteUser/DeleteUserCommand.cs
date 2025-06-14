@@ -1,10 +1,14 @@
 using MediatR;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 
 /// <summary>
 /// Command for deleting a user
 /// </summary>
+/// 
+
+[ExcludeFromCodeCoverage]
 public record DeleteUserCommand : IRequest<DeleteUserResponse>
 {
     /// <summary>

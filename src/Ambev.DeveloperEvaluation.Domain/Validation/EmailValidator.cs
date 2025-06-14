@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using System.Text.RegularExpressions;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.Domain.Validation;
 
@@ -9,11 +10,11 @@ public class EmailValidator : AbstractValidator<string>
     {
         RuleFor(email => email)
             .NotEmpty()
-            .WithMessage("The email address cannot be empty.")
+            .WithMessage(ValidationMessages.EmailRequired)
             .MaximumLength(100)
-            .WithMessage("The email address cannot be longer than 100 characters.")
+            .WithMessage(ValidationMessages.EmailMaxLength)
             .Must(BeValidEmail)
-            .WithMessage("The provided email address is not valid.");
+            .WithMessage(ValidationMessages.EmailInvalidFormat);
     }
 
     private bool BeValidEmail(string email)

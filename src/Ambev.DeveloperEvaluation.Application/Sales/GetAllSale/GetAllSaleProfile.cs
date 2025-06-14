@@ -1,9 +1,11 @@
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using AutoMapper;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.GetAllSale;
 
+[ExcludeFromCodeCoverage]
 public class GetAllSaleProfile : Profile
 {
   public GetAllSaleProfile()

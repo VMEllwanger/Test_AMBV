@@ -1,34 +1,35 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Domain.Validation;
 
 public class SaleItemValidator : AbstractValidator<SaleItem>
 {
-  public SaleItemValidator()
-  {
-    RuleFor(x => x.ProductId)
-        .NotEmpty()
-        .WithMessage("O ID do produto é obrigatório");
+    public SaleItemValidator()
+    {
+        RuleFor(x => x.ProductId)
+            .NotEmpty()
+            .WithMessage(ValidationMessages.ProductIdRequired);
 
-    RuleFor(x => x.ProductName)
-        .NotEmpty()
-        .WithMessage("O nome do produto é obrigatório");
+        RuleFor(x => x.ProductName)
+            .NotEmpty()
+            .WithMessage(ValidationMessages.ProductNameRequired);
 
-    RuleFor(x => x.Quantity)
-        .GreaterThan(0)
-        .WithMessage("A quantidade deve ser maior que zero")
-        .LessThanOrEqualTo(20)
-        .WithMessage("A quantidade não pode ser maior que 20");
+        RuleFor(x => x.Quantity)
+            .GreaterThan(0)
+            .WithMessage(ValidationMessages.QuantityGreaterThanZero)
+            .LessThanOrEqualTo(20)
+            .WithMessage(ValidationMessages.QuantityMaxLimit);
 
-    RuleFor(x => x.UnitPrice)
-        .GreaterThan(0)
-        .WithMessage("O preço unitário deve ser maior que zero");
+        RuleFor(x => x.UnitPrice)
+            .GreaterThan(0)
+            .WithMessage(ValidationMessages.UnitPriceGreaterThanZero);
 
-    RuleFor(x => x.Discount)
-        .GreaterThanOrEqualTo(0)
-        .WithMessage("O desconto não pode ser negativo")
-        .LessThanOrEqualTo(1)
-        .WithMessage("O desconto não pode ser maior que 100%");
-  }
+        RuleFor(x => x.Discount)
+            .GreaterThanOrEqualTo(0)
+            .WithMessage(ValidationMessages.DiscountCannotBeNegative)
+            .LessThanOrEqualTo(1)
+            .WithMessage(ValidationMessages.DiscountMaxLimit);
+    }
 }

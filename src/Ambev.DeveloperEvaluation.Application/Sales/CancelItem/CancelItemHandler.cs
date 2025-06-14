@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Interfaces;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
@@ -49,7 +50,7 @@ public class CancelItemHandler : IRequestHandler<CancelItemCommand, CancelItemRe
             return new CancelItemResult
             {
                 Success = false,
-                Message = "Sale not found"
+                Message = string.Format(ApiMessages.SaleNotFound, request.SaleId)
             };
         }
 
@@ -59,7 +60,7 @@ public class CancelItemHandler : IRequestHandler<CancelItemCommand, CancelItemRe
             return new CancelItemResult
             {
                 Success = false,
-                Message = "Cannot cancel an item from a cancelled sale"
+                Message = ApiMessages.CannotCancelItemFromCancelledSale
             };
         }
 
@@ -70,7 +71,7 @@ public class CancelItemHandler : IRequestHandler<CancelItemCommand, CancelItemRe
             return new CancelItemResult
             {
                 Success = false,
-                Message = "Item not found in sale"
+                Message = ApiMessages.ItemNotFoundInSale
             };
         }
 
@@ -80,11 +81,10 @@ public class CancelItemHandler : IRequestHandler<CancelItemCommand, CancelItemRe
             return new CancelItemResult
             {
                 Success = false,
-                Message = "Item is already cancelled"
+                Message = ApiMessages.ItemAlreadyCancelled
             };
         }
 
-        _logger.LogDebug("Cancelling item");
         item.IsCancelled = true;
 
         _logger.LogInformation("Saving updated sale to repository");
@@ -104,7 +104,7 @@ public class CancelItemHandler : IRequestHandler<CancelItemCommand, CancelItemRe
         return new CancelItemResult
         {
             Success = true,
-            Message = "Item cancelled successfully"
+            Message = ApiMessages.ItemCancelled
         };
     }
 }

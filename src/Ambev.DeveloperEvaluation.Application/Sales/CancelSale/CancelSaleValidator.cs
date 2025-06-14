@@ -1,19 +1,20 @@
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CancelSale;
 
 public class CancelSaleValidator : AbstractValidator<CancelSaleCommand>
 {
-  public CancelSaleValidator()
-  {
-    RuleFor(x => x.Id)
-        .NotEmpty()
-        .WithMessage("O ID da venda é obrigatório");
+    public CancelSaleValidator()
+    {
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage(ValidationMessages.SaleIdRequired);
 
-    RuleFor(x => x.CancellationReason)
-        .NotEmpty()
-        .WithMessage("O motivo do cancelamento é obrigatório")
-        .MaximumLength(500)
-        .WithMessage("O motivo do cancelamento deve ter no máximo 500 caracteres");
-  }
+        RuleFor(x => x.CancellationReason)
+            .NotEmpty()
+            .WithMessage(ValidationMessages.CancellationReasonRequired)
+            .MaximumLength(500)
+            .WithMessage(ValidationMessages.CancellationReasonMaxLength);
+    }
 }

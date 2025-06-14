@@ -1,4 +1,5 @@
 using FluentValidation;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 
@@ -14,6 +15,6 @@ public class GetUserValidator : AbstractValidator<GetUserCommand>
     {
         RuleFor(x => x.Id)
             .NotEmpty()
-            .WithMessage("User ID is required");
+            .WithMessage(ValidationMessages.UserIdRequired);
     }
 }

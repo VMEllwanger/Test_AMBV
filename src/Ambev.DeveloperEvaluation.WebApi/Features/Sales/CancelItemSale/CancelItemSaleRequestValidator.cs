@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CancelItemSale;
@@ -8,6 +9,6 @@ public class CancelItemSaleRequestValidator : AbstractValidator<CancelItemSaleRe
   {
     RuleFor(x => x.Id)
         .NotEmpty()
-        .WithMessage("Item ID is required");
+        .WithMessage(ValidationMessages.ItemIdRequired);
   }
 }
