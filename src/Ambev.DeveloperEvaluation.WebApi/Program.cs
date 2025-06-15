@@ -68,7 +68,6 @@ public class Program
             });
             Log.Information("MediatR configured");
 
-            // Adicionando o registro dos validadores do FluentValidation
             builder.Services.AddScoped<IValidator<Application.Sales.UpdateSale.UpdateSaleCommand>, Application.Sales.UpdateSale.UpdateSaleValidator>();
             builder.Services.AddScoped<IValidator<Application.Sales.GetSale.GetSaleCommand>, Application.Sales.GetSale.GetSaleValidator>();
             builder.Services.AddScoped<IValidator<Application.Sales.GetAllSale.GetAllSaleCommand>, Application.Sales.GetAllSale.GetAllSaleValidator>();
@@ -78,7 +77,6 @@ public class Program
             builder.Services.AddScoped<IValidator<Application.Sales.CancelItem.CancelItemCommand>, Application.Sales.CancelItem.CancelItemValidator>();
             Log.Information("FluentValidation validators registered");
 
-            // Registrando o publisher de eventos
             builder.Services.AddScoped<ISaleEventPublisher, SaleEventPublisher>();
             Log.Information("Event publisher registered");
 

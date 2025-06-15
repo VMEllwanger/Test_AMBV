@@ -94,15 +94,15 @@ public class Sale : BaseEntity
         {
             if (item.Quantity >= 10 && item.Quantity <= 20)
             {
-                item.Discount = 0.20m; // 20% discount
+                item.Discount = 0.20m;
             }
             else if (item.Quantity >= 4)
             {
-                item.Discount = 0.10m; // 10% discount
+                item.Discount = 0.10m;
             }
             else
             {
-                item.Discount = 0m; // No discount
+                item.Discount = 0m;
             }
 
             item.CalculateTotalAmount();

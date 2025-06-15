@@ -108,20 +108,18 @@ public class CancelItemHandlerTests
         // Given 
         var command = new CancelItemCommand();
 
-        // Adiciona à lista de erros
         var _errors = new List<ValidationFailure> {
             new ValidationFailure("SaleId", ValidationMessages.SaleIdRequired),
             new ValidationFailure("ItemId", ValidationMessages.ItemIdRequired)
         };
 
-        // Simula retorno de validação com erro
         _validator.ValidateAsync(command, Arg.Any<CancellationToken>())
                   .Returns(new ValidationResult(_errors));
 
         // When 
         Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
 
-        // Then - 
+        // Then
         var exception = await act.Should()
             .ThrowAsync<ValidationException>();
 
