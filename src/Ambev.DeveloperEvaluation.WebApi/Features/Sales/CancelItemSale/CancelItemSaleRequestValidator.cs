@@ -7,6 +7,10 @@ public class CancelItemSaleRequestValidator : AbstractValidator<CancelItemSaleRe
 {
   public CancelItemSaleRequestValidator()
   {
+    RuleFor(x => x.SaleId)
+        .NotEmpty()
+        .WithMessage(ValidationMessages.SaleIdRequired);
+
     RuleFor(x => x.Id)
         .NotEmpty()
         .WithMessage(ValidationMessages.ItemIdRequired);

@@ -10,5 +10,11 @@ public class CancelSaleRequestValidator : AbstractValidator<CancelSaleRequest>
     RuleFor(x => x.Id)
         .NotEmpty()
         .WithMessage(ValidationMessages.SaleIdRequired);
+
+    RuleFor(x => x.CancellationReason)
+        .NotEmpty()
+        .WithMessage(ValidationMessages.CancellationReasonRequired)
+        .MaximumLength(500)
+        .WithMessage(ValidationMessages.CancellationReasonMaxLength);
   }
 }

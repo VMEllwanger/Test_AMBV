@@ -7,14 +7,6 @@ public class CreateSaleValidator : AbstractValidator<CreateSaleCommand>
 {
     public CreateSaleValidator()
     {
-        RuleFor(x => x.SaleNumber)
-            .NotEmpty()
-            .WithMessage(ValidationMessages.SaleNumberRequired);
-
-        RuleFor(x => x.Date)
-            .NotEmpty()
-            .WithMessage(ValidationMessages.SaleDateRequired);
-
         RuleFor(x => x.Customer)
             .NotEmpty()
             .WithMessage(ValidationMessages.CustomerRequired);
@@ -39,10 +31,6 @@ public class CreateSaleItemValidator : AbstractValidator<CreateSaleItemCommand>
         RuleFor(x => x.ProductId)
             .NotEmpty()
             .WithMessage(ValidationMessages.ProductIdRequired);
-
-        RuleFor(x => x.ProductName)
-            .NotEmpty()
-            .WithMessage(ValidationMessages.ProductNameRequired);
 
         RuleFor(x => x.Quantity)
             .GreaterThan(0)
