@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.Domain.Validation;
 
@@ -8,10 +9,16 @@ public class PasswordValidator : AbstractValidator<string>
     {
         RuleFor(password => password)
             .NotEmpty()
+            .WithMessage(ValidationMessages.PasswordRequired)
             .MinimumLength(8)
-            .Matches(@"[A-Z]+").WithMessage("Password must contain at least one uppercase letter.")
-            .Matches(@"[a-z]+").WithMessage("Password must contain at least one lowercase letter.")
-            .Matches(@"[0-9]+").WithMessage("Password must contain at least one number.")
-            .Matches(@"[\!\?\*\.\@\#\$\%\^\&\+\=]+").WithMessage("Password must contain at least one special character.");
+            .WithMessage(ValidationMessages.PasswordMinLength)
+            .Matches(@"[A-Z]+")
+            .WithMessage(ValidationMessages.PasswordUppercaseRequired)
+            .Matches(@"[a-z]+")
+            .WithMessage(ValidationMessages.PasswordLowercaseRequired)
+            .Matches(@"[0-9]+")
+            .WithMessage(ValidationMessages.PasswordNumberRequired)
+            .Matches(@"[\!\?\*\.\@\#\$\%\^\&\+\=]+")
+            .WithMessage(ValidationMessages.PasswordSpecialCharRequired);
     }
 }

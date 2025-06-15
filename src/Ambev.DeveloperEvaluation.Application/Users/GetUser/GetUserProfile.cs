@@ -1,11 +1,14 @@
-using AutoMapper;
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using AutoMapper;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 
 /// <summary>
 /// Profile for mapping between User entity and GetUserResponse
 /// </summary>
+/// 
+[ExcludeFromCodeCoverage]
 public class GetUserProfile : Profile
 {
     /// <summary>

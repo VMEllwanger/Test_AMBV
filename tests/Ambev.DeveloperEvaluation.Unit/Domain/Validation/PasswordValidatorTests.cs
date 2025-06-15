@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Constants;
 using Ambev.DeveloperEvaluation.Domain.Validation;
 using Ambev.DeveloperEvaluation.Unit.Domain.Entities.TestData;
 using FluentValidation.TestHelper;
@@ -80,7 +81,7 @@ public class PasswordValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(x => x)
-            .WithErrorMessage("Password must contain at least one uppercase letter.");
+            .WithErrorMessage(ValidationMessages.PasswordUppercaseRequired);
     }
 
     /// <summary>
@@ -97,7 +98,7 @@ public class PasswordValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(x => x)
-            .WithErrorMessage("Password must contain at least one lowercase letter.");
+            .WithErrorMessage(ValidationMessages.PasswordLowercaseRequired);
     }
 
     /// <summary>
@@ -114,7 +115,7 @@ public class PasswordValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(x => x)
-            .WithErrorMessage("Password must contain at least one number.");
+            .WithErrorMessage(ValidationMessages.PasswordNumberRequired);
     }
 
     /// <summary>
@@ -131,6 +132,6 @@ public class PasswordValidatorTests
 
         // Assert
         result.ShouldHaveValidationErrorFor(x => x)
-            .WithErrorMessage("Password must contain at least one special character.");
+            .WithErrorMessage(ValidationMessages.PasswordSpecialCharRequired);
     }
 }

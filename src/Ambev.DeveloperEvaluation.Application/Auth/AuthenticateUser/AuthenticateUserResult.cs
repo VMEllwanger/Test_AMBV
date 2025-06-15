@@ -1,8 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
 
 /// <summary>
 /// Represents the response after authenticating a user
 /// </summary>
+/// 
+[ExcludeFromCodeCoverage]
 public sealed class AuthenticateUserResult
 {
     /// <summary>

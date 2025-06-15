@@ -1,10 +1,13 @@
 using Ambev.DeveloperEvaluation.Domain.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 
 /// <summary>
 /// Response model for GetUser operation
 /// </summary>
+/// 
+[ExcludeFromCodeCoverage]
 public class GetUserResult
 {
     /// <summary>
@@ -25,7 +28,7 @@ public class GetUserResult
     /// <summary>
     /// The user's phone number
     /// </summary>
-    public string Phone { get; set; } = string.Empty;   
+    public string Phone { get; set; } = string.Empty;
 
     /// <summary>
     /// The user's role in the system

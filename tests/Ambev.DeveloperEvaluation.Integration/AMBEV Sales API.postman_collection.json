@@ -1,0 +1,726 @@
+{
+	"info": {
+		"_postman_id": "74671b70-8767-484c-8784-070a1a789feb",
+		"name": "AMBEV Sales API",
+		"description": "Testes manuais da API de Vendas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5759918",
+		"_collection_link": "https://ccfvcomandaonline.postman.co/workspace/Orizon~57ada9b6-6ad4-418d-a0b8-829f48103231/collection/5759918-74671b70-8767-484c-8784-070a1a789feb?action=share&source=collection_link&creator=5759918"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"item": [
+				{
+					"name": "Create Sale",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmYzFmMjQ3NS0zZTg3LTQ0NzctYmFjOC1jODQzZGNmN2RhZjYiLCJ1bmlxdWVfbmFtZSI6InZpdG9yIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzQ5OTM1OTgxLCJleHAiOjE3NDk5NjQ3ODEsImlhdCI6MTc0OTkzNTk4MX0.dLNwsfXUWheqrM4vi-vSAVB_w-MtepMKKEnawo5fyk8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"branch\": \"Branch 1\",\n    \"customer\": \"Evan Due\",\n    \"items\": [\n        {\n            \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"quantity\": 2,\n            \"unitPrice\": 10.50\n        },\n              {\n            \"productId\": \"42661417-e89b-12d3-a456-123e45674000\",\n            \"quantity\": 10,\n            \"unitPrice\": 80.50\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/sales",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sales"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"branch\": \"Branch 1\",\n    \"customer\": \"John Doe\",\n    \"items\": [\n        {\n            \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"quantity\": 2,\n            \"unitPrice\": 10.50\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/sale",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sale"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Jun 2025 21:27:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Location",
+									"value": ""
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"0e3651b7-3b8e-428d-a273-de10908c6f94\",\n        \"branch\": \"Branch 1\",\n        \"customer\": \"John Doe\",\n        \"items\": [\n            {\n                \"id\": \"0ba1abd5-37b0-44b5-abbc-f899f8cb9c7b\",\n                \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n                \"quantity\": 2,\n                \"unitPrice\": 10.5,\n                \"totalAmount\": 21\n            }\n        ],\n        \"totalAmount\": 21,\n        \"createdAt\": \"0001-01-01T00:00:00\"\n    },\n    \"success\": true,\n    \"message\": \"Sale created successfully\",\n    \"errors\": []\n}"
+						},
+						{
+							"name": "Create Sale 2",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"branch\": \"Branch 1\",\n    \"customer\": \"Evan Due\",\n    \"items\": [\n        {\n            \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"quantity\": 2,\n            \"unitPrice\": 10.50\n        },\n              {\n            \"productId\": \"42661417-e89b-12d3-a456-123e45674000\",\n            \"quantity\": 10,\n            \"unitPrice\": 80.50\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/sale",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sale"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Jun 2025 21:29:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Location",
+									"value": ""
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"3d123340-fac9-44c7-9fe2-64d0ff935a09\",\n        \"branch\": \"Branch 1\",\n        \"customer\": \"Evan Due\",\n        \"items\": [\n            {\n                \"id\": \"99b1a526-3367-4ff9-8f2f-86338592f21a\",\n                \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n                \"quantity\": 2,\n                \"unitPrice\": 10.5,\n                \"totalAmount\": 21\n            },\n            {\n                \"id\": \"fbb1075f-9ca4-4bba-ba06-1291ccdb9a99\",\n                \"productId\": \"42661417-e89b-12d3-a456-123e45674000\",\n                \"quantity\": 10,\n                \"unitPrice\": 80.5,\n                \"totalAmount\": 644\n            }\n        ],\n        \"totalAmount\": 665,\n        \"createdAt\": \"0001-01-01T00:00:00\"\n    },\n    \"success\": true,\n    \"message\": \"Sale created successfully\",\n    \"errors\": []\n}"
+						},
+						{
+							"name": "Item Delete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"branch\": \"Branch 1\",\n    \"customer\": \"Item Delete\",\n    \"items\": [\n        {\n            \"productId\": \"f82e31b1-5c65-4aad-8d5f-015edf703efc\",\n            \"quantity\": 2,\n            \"unitPrice\": 10.50\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/sales",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sales"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Jun 2025 21:56:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Location",
+									"value": ""
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"ff9f703e-9524-4693-84ad-4a3e770a5e5d\",\n        \"branch\": \"Branch 1\",\n        \"customer\": \"Item Delete\",\n        \"items\": [\n            {\n                \"id\": \"b97049ae-31e6-44aa-91fc-b0a2a620785f\",\n                \"productId\": \"f82e31b1-5c65-4aad-8d5f-015edf703efc\",\n                \"quantity\": 2,\n                \"unitPrice\": 10.5,\n                \"totalAmount\": 21\n            }\n        ],\n        \"totalAmount\": 21,\n        \"createdAt\": \"0001-01-01T00:00:00\"\n    },\n    \"success\": true,\n    \"message\": \"Sale created successfully\",\n    \"errors\": []\n}"
+						},
+						{
+							"name": "Quantity greater than 20",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"branch\": \"Branch 1\",\n    \"customer\": \"Mais de Vinte\",\n    \"items\": [\n        {\n            \"productId\": \"35e76054-db60-4048-90ae-bbd947efe743\",\n            \"quantity\": 21,\n            \"unitPrice\": 10.50\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/sales",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sales"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Jun 2025 14:48:10 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Validation Failed\",\n    \"errors\": [\n        {\n            \"error\": \"LessThanOrEqualValidator\",\n            \"detail\": \"Quantity cannot be greater than 20\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Read",
+			"item": [
+				{
+					"name": "Get Sale by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmYzFmMjQ3NS0zZTg3LTQ0NzctYmFjOC1jODQzZGNmN2RhZjYiLCJ1bmlxdWVfbmFtZSI6InZpdG9yIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzQ5OTM1OTgxLCJleHAiOjE3NDk5NjQ3ODEsImlhdCI6MTc0OTkzNTk4MX0.dLNwsfXUWheqrM4vi-vSAVB_w-MtepMKKEnawo5fyk8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sales/{{saleId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sales",
+								"{{saleId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Sale by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sales/{{saleId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sales",
+										"{{saleId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Jun 2025 21:38:56 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"0e3651b7-3b8e-428d-a273-de10908c6f94\",\n        \"branch\": \"Branch 1\",\n        \"customer\": \"John Doe\",\n        \"items\": [\n            {\n                \"id\": \"0ba1abd5-37b0-44b5-abbc-f899f8cb9c7b\",\n                \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n                \"quantity\": 2,\n                \"unitPrice\": 10.5,\n                \"totalAmount\": 21\n            }\n        ],\n        \"totalAmount\": 21,\n        \"createdAt\": \"0001-01-01T00:00:00\",\n        \"isCancelled\": false\n    },\n    \"success\": true,\n    \"message\": \"Sale retrieved successfully\",\n    \"errors\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Sales",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmYzFmMjQ3NS0zZTg3LTQ0NzctYmFjOC1jODQzZGNmN2RhZjYiLCJ1bmlxdWVfbmFtZSI6InZpdG9yIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzQ5OTM1OTgxLCJleHAiOjE3NDk5NjQ3ODEsImlhdCI6MTc0OTkzNTk4MX0.dLNwsfXUWheqrM4vi-vSAVB_w-MtepMKKEnawo5fyk8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sales?page=1&pageSize=10&startDate=2024-01-01&endDate=2024-12-31&sortBy=saleDate&sortDirection=desc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31"
+								},
+								{
+									"key": "sortBy",
+									"value": "saleDate"
+								},
+								{
+									"key": "sortDirection",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Sales",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sale?page=1&pageSize=10&startDate=2024-01-01&endDate=2024-12-31&sortBy=saleDate&sortDirection=desc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sale"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "startDate",
+											"value": "2024-01-01"
+										},
+										{
+											"key": "endDate",
+											"value": "2024-12-31"
+										},
+										{
+											"key": "sortBy",
+											"value": "saleDate"
+										},
+										{
+											"key": "sortDirection",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Jun 2025 21:35:17 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": \"0e3651b7-3b8e-428d-a273-de10908c6f94\",\n                \"branch\": \"Branch 1\",\n                \"customer\": \"John Doe\",\n                \"totalAmount\": 21,\n                \"createdAt\": \"0001-01-01T00:00:00\",\n                \"isCancelled\": false\n            },\n            {\n                \"id\": \"3d123340-fac9-44c7-9fe2-64d0ff935a09\",\n                \"branch\": \"Branch 1\",\n                \"customer\": \"Evan Due\",\n                \"totalAmount\": 665,\n                \"createdAt\": \"0001-01-01T00:00:00\",\n                \"isCancelled\": false\n            }\n        ],\n        \"totalCount\": 2,\n        \"pageCount\": 1,\n        \"currentPage\": 1,\n        \"pageSize\": 0\n    },\n    \"success\": true,\n    \"message\": \"Sale retrieved successfully\",\n    \"errors\": []\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"item": [
+				{
+					"name": "Update Sale",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmYzFmMjQ3NS0zZTg3LTQ0NzctYmFjOC1jODQzZGNmN2RhZjYiLCJ1bmlxdWVfbmFtZSI6InZpdG9yIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzQ5OTM1OTgxLCJleHAiOjE3NDk5NjQ3ODEsImlhdCI6MTc0OTkzNTk4MX0.dLNwsfXUWheqrM4vi-vSAVB_w-MtepMKKEnawo5fyk8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"branch\": \"Branch 2\",\n    \"customer\": \"Jane Smith\",\n    \"items\": [\n        {\n            \"id\": \"0ba1abd5-37b0-44b5-abbc-f899f8cb9c7b\",\n            \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"quantity\": 5,\n            \"unitPrice\": 10.50\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/sales/{{saleId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sales",
+								"{{saleId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Sale",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"branch\": \"Branch 2\",\n    \"customer\": \"Jane Smith\",\n    \"items\": [\n        {\n            \"id\": \"0ba1abd5-37b0-44b5-abbc-f899f8cb9c7b\",\n            \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"quantity\": 5,\n            \"unitPrice\": 10.50\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/sales/{{saleId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sales",
+										"{{saleId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Jun 2025 21:54:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"0e3651b7-3b8e-428d-a273-de10908c6f94\",\n        \"branch\": \"Branch 2\",\n        \"customer\": \"Jane Smith\",\n        \"items\": [\n            {\n                \"id\": \"0ba1abd5-37b0-44b5-abbc-f899f8cb9c7b\",\n                \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n                \"quantity\": 5,\n                \"unitPrice\": 10.5,\n                \"totalAmount\": 0\n            }\n        ],\n        \"totalAmount\": 21,\n        \"createdAt\": \"0001-01-01T00:00:00\",\n        \"isCancelled\": false\n    },\n    \"success\": true,\n    \"message\": \"Sale updated successfully\",\n    \"errors\": []\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "Delete Sale",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sales/{{saleId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sales",
+								"{{saleId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Sale",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sales/{{saleId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sales",
+										"{{saleId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Jun 2025 21:58:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Sale deleted successfully\",\n    \"errors\": []\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cancel",
+			"item": [
+				{
+					"name": "Cancel Sale",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cancellationReason\": \"Customer requested cancellation\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/sales/{{saleId}}/cancel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sales",
+								"{{saleId}}",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Sale Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sales/{{saleId}}/items/{{itemId}}/cancel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sales",
+								"{{saleId}}",
+								"items",
+								"{{itemId}}",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test(\"Response has correct structure\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    pm.expect(jsonData).to.have.property('success');",
+					"    pm.expect(jsonData).to.have.property('message');",
+					"    pm.expect(jsonData).to.have.property('data');",
+					"});",
+					"",
+					"pm.test(\"Response time is less than 200ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "saleId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "itemId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -1,4 +1,5 @@
 using FluentValidation;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 
@@ -14,6 +15,6 @@ public class DeleteUserValidator : AbstractValidator<DeleteUserCommand>
     {
         RuleFor(x => x.Id)
             .NotEmpty()
-            .WithMessage("User ID is required");
+            .WithMessage(ValidationMessages.UserIdRequired);
     }
 }

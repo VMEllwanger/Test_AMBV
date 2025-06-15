@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Ambev.DeveloperEvaluation.Domain.Constants;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Common;
 
@@ -22,7 +23,7 @@ public class BaseController : ControllerBase
     protected IActionResult BadRequest(string message) =>
         base.BadRequest(new ApiResponse { Message = message, Success = false });
 
-    protected IActionResult NotFound(string message = "Resource not found") =>
+    protected IActionResult NotFound(string message = ApiMessages.ResourceNotFound) =>
         base.NotFound(new ApiResponse { Message = message, Success = false });
 
     protected IActionResult OkPaginated<T>(PaginatedList<T> pagedList) =>

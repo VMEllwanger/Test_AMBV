@@ -1,4 +1,5 @@
 using MediatR;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
 
@@ -6,6 +7,8 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
 /// Command for authenticating a user in the system.
 /// Implements IRequest for mediator pattern handling.
 /// </summary>
+/// 
+[ExcludeFromCodeCoverage]
 public class AuthenticateUserCommand : IRequest<AuthenticateUserResult>
 {
     /// <summary>

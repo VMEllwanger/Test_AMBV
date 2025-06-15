@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using MediatR;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 
@@ -18,6 +19,8 @@ namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 /// <see cref="AbstractValidator{T}"/> to ensure that the fields are correctly 
 /// populated and follow the required rules.
 /// </remarks>
+/// 
+[ExcludeFromCodeCoverage]
 public class CreateUserCommand : IRequest<CreateUserResult>
 {
     /// <summary>
